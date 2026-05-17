@@ -40,7 +40,7 @@
 <script>
   var map = L.map('map', {
     center: [36.7372, 3.0865],
-    zoom: 10
+    zoom: 12
   });
 
 // Fond satellite
@@ -48,11 +48,17 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
   attribution: 'Tiles © Esri'
 }).addTo(map);
 
-// Couche routes + noms de villes par dessus
+// Noms de villes
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', {
   opacity: 1.0
 }).addTo(map);
 
+// Routes
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}', {
+  opacity: 1.0
+}).addTo(map);
+
+  
   fetch('Sites.csv')
     .then(r => r.text())
     .then(csv => {
