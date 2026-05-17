@@ -47,7 +47,7 @@
   var bounds = [];
   var redPoints = [];
 
-  fetch('sites.csv')
+  fetch('Sites.csv')
     .then(r => r.text())
     .then(csv => {
       var lines = csv.split('\n');
