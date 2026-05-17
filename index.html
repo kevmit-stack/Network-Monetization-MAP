@@ -38,13 +38,14 @@
 <div id="map"></div>
 
 <script>
-  var map = L.map('map').setView([36.7372, 3.0865], 7);
+  var map = L.map('map', {
+    center: [36.7372, 3.0865],
+    zoom: 7
+  });
 
   L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
     attribution: 'Tiles © Esri'
   }).addTo(map);
-
-  var bounds = [];
 
   fetch('Sites.csv')
     .then(r => r.text())
@@ -58,8 +59,8 @@
         var f = line.split(';');
         if (f.length < 3) return;
 
-        var x    = parseFloat(f[0]);  // longitude
-        var y    = parseFloat(f[1]);  // latitude
+        var x    = parseFloat(f[0]);
+        var y    = parseFloat(f[1]);
         var type = f[2].trim();
 
         if (isNaN(x) || isNaN(y)) return;
@@ -78,9 +79,6 @@
           fillOpacity: 0.95
         }).addTo(map);
 
-        bounds.push([y, x]);
-
-        // Cercle rouge autour des zones rouges
         if (type.match(/red|rouge/i)) {
           L.circle([y, x], {
             radius: 800,
@@ -91,11 +89,6 @@
           }).addTo(map);
         }
       });
-
-      // Zoom automatique sur les données
-      //if (bounds.length > 0) {
-      //  map.fitBounds(bounds, { padding: [30, 30] });
-      //}
     })
     .catch(err => console.error('Erreur CSV:', err));
 </script>
