@@ -48,9 +48,11 @@ var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/service
   attribution: 'Tiles © Esri'
 });
 
-var plan = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '© OpenStreetMap'
-});  
+
+// version plan  
+//var plan = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+//  attribution: '© OpenStreetMap'
+//});  
 
   
 var villes = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}');
@@ -58,12 +60,13 @@ var villes = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/R
 var routes = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}');
 
 // Afficher satellite par défaut
+//plan.addTo(map);
 satellite.addTo(map);
 
 // Contrôle utilisateur
 var baseLayers = {
   "🛰️ Satellite" : satellite,
-  "🗺️ Plan"      : plan
+//  "🗺️ Plan"      : plan
 };
   
 var overlays = {
