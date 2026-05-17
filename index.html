@@ -38,14 +38,13 @@
 <div id="map"></div>
 
 <script>
-  // Fond satellite ESRI
   var map = L.map('map').setView([36.7, 3.0], 7);
+
   L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
     attribution: 'Tiles © Esri'
   }).addTo(map);
 
   var bounds = [];
-  var redPoints = [];
 
   fetch('Sites.csv')
     .then(r => r.text())
@@ -56,7 +55,6 @@
         line = line.trim();
         if (!line) return;
 
-        // Séparateur ;
         var f = line.split(';');
         if (f.length < 3) return;
 
@@ -64,7 +62,6 @@
         var y    = parseFloat(f[1]);  // latitude
         var type = f[2].trim();
 
-        // Ignorer l'en-tête
         if (isNaN(x) || isNaN(y)) return;
 
         var color  = '#00cc00';
